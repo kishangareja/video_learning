@@ -10,6 +10,12 @@ class Login_model extends CI_Model {
 		return $this->gdb->get($this->common->getAdminTable())->row();
 	}
 
+	public function getTeacherLogin($email, $pwd) {
+		$this->db->where('email', $email);
+		$this->db->where('password', $pwd);
+		return $this->gdb->get($this->common->getTeacherTable())->row();
+	}
+
 	public function getUserLogin($email, $pwd) {
 		$this->db->where('email', $email);
 		$this->db->where('password', $pwd);

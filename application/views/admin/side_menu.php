@@ -8,6 +8,9 @@
                     <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                 </a>
             </li>
+            <?php if ($this->session->userdata('teacher_id') == '') {?>
+
+
              <li class="<?=($this->uri->segment('2') == 'classes' ? 'active' : '');?>">
                 <a href="<?php echo base_url('admin/classes') ?>">
                     <i class="fa fa-dashboard"></i> <span>Class</span>
@@ -18,26 +21,25 @@
                     <i class="fa fa-dashboard"></i> <span>Students</span>
                 </a>
             </li>
+            <?php }?>
              <li class="<?=($this->uri->segment('2') == 'videos' ? 'active' : '');?>">
                 <a href="<?php echo base_url('admin/videos') ?>">
                     <i class="fa fa-dashboard"></i> <span>Videos</span>
                 </a>
             </li>
-
-
-
-         <!--    <li class="<?=($this->uri->segment('3') == 'project' ? 'active' : '');?>">
-                <a href="<?php echo base_url('admin/project') ?>">
-                    <i class="fa fa-address-card-o"></i> <span>Project</span>
+<?php if ($this->session->userdata('teacher_id') == '') {?>
+            <li class="<?=($this->uri->segment('3') == 'teacher' ? 'active' : '');?>">
+                <a href="<?php echo base_url('admin/teacher') ?>">
+                    <i class="fa fa-address-card-o"></i> <span>Teacher</span>
                 </a>
-            </li> -->
+            </li>
 
             <li class="<?=($this->uri->segment('3') == 'change_password' ? 'active' : '');?>">
                 <a href="<?php echo base_url("admin/login/change_password") ?>">
                     <i class="fa fa-dashboard"></i> <span>Change Password</span>
                 </a>
             </li>
-
+<?php }?>
              <li class="<?=($this->uri->segment('3') == 'logout' ? 'active' : '');?>">
                 <a href="<?php echo base_url("admin/login/logout") ?>">
                     <i class="fa fa-sign-out" aria-hidden="true"></i> <span>Logout</span>

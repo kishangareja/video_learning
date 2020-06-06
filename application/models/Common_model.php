@@ -12,6 +12,7 @@ class Common_model extends CI_Model {
 	private $classes = 'classes';
 	private $project = 'projects';
 	private $videos = 'videos';
+	private $teacher = 'teacher';
 
 	public function getUserTable() {
 		return $this->users;
@@ -19,6 +20,10 @@ class Common_model extends CI_Model {
 
 	public function getClassesTable() {
 		return $this->classes;
+	}
+
+	public function getTeacherTable() {
+		return $this->teacher;
 	}
 
 	public function getVideosTable() {

@@ -65,7 +65,7 @@ if (isset($user_data) && $user_data->class_id == $value->id) {
               </div>
               <div class="form-group <?php echo ((form_error('password') != "") ? "has-error" : ""); ?>">
                 <label for="exampleInputEmail1">Password : </label>
-                <input type="password" name="password" class="form-control" placeholder="Enter password" value="" >
+                <input type="password" name="password" class="form-control" placeholder="Enter password" >
                 <?php echo ((form_error('password') != "") ? '<span class="help-inline" style="color:red">' . form_error('password') . '</span>' : ''); ?>
               </div>
               <div class="form-group <?php echo ((form_error('user_image') != "") ? "has-error" : ""); ?>">

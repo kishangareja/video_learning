@@ -15,6 +15,7 @@ class Classes_model extends CI_Model {
 		if ($status) {
 			$this->gdb->where('status', $status);
 		}
+		$this->gdb->where('is_deleted', 0);
 		return $this->gdb->get($this->common->getClassesTable())->result();
 	}
 

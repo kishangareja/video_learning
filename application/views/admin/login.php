@@ -16,9 +16,6 @@
         <link rel="stylesheet" href="<?=base_url('assets/admin/dist/css/AdminLTE.min.css');?>">
         <!-- iCheck -->
         <link rel="stylesheet" href="<?=base_url('assets/admin/plugins/iCheck/square/blue.css');?>">
-
-
-
         <!-- Google Font -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     </head>
@@ -50,8 +47,8 @@ if (isset($msg) && $msg != '') {
 
                 <?php
 $url = base_url('admin/login');
-if ($this->uri->segment('1') == 'beautician') {
-	$url = base_url('beautician');
+if ($this->uri->segment('2') == 'teacher_login') {
+	$url = base_url('login/teacher_login');
 }
 ?>
 

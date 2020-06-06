@@ -61,6 +61,35 @@ class Login extends CI_Controller {
 		echo json_encode(array('success' => $success, 'message' => $message, 'response' => $user_detail));
 	}
 
+	public function teacher_login() {
+		if ($this->session->userdata('teacher_id')) {
+			redirect('teacher/home');
+		}
+
+		$this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+		$this->form_validation->set_rules('pwd', 'Password', 'required');
+
+		$this->form_validation->set_error_delimiters('', '');
+		$data['msg'] = '';
+		if ($this->form_validation->run() == TRUE) {
+			$email = $_POST['email'];
+			$password = md5($_POST['pwd']);
+			$data = $this->login_model->getTeacherLogin($email, $password);
+			if ($data) {
+				$this->session->set_userdata('teacher_id', $data->id);
+				$this->session->set_userdata('teacher_data', $data);
+				$array = array("teacher_id" => $data->id, "teacher_email" => $data->email);
+				$this->session->set_userdata($array);
+				redirect('teacher/home');
+			} else {
+				$this->session->set_flashdata('msg', "Emailid or Password did not matched");
+				$data['msg'] = 'Emailid or Password did not matched.';
+				redirect('login/teacher_login', $data);
+			}
+		}
+		$this->load->view('admin/login', $data);
+	}
+
 	public function logout() {
 		$this->session->sess_destroy();
 		redirect(base_url());

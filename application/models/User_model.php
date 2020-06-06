@@ -50,6 +50,7 @@ class User_model extends CI_Model {
 	public function getAllUser() {
 		$this->gdb->select('u.*, t.name AS class_name');
 		$this->gdb->join($this->common->getClassesTable() . ' AS t', 'u.class_id = t.id', 'LEFT');
+		$this->gdb->where('u.is_deleted', 0);
 		return $this->db->get($this->common->getUserTable() . ' AS  u ')->result();
 	}
 
@@ -59,7 +60,6 @@ class User_model extends CI_Model {
 	public function getUser($id) {
 		$this->db->select('u.*');
 		$this->db->where('u.user_id', $id);
-		// $this->db->where('u.status', $user_status);
 		return $this->gdb->get($this->common->getUserTable() . ' As u')->row();
 	}
 

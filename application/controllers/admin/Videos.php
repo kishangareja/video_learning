@@ -8,7 +8,7 @@ class Videos extends CI_Controller {
 		parent::__construct();
 		$this->load->model('videos_model');
 		$this->load->model('classes_model');
-		$this->gdb->checkAdminLogin();
+		// $this->gdb->checkAdminLogin();
 
 	}
 

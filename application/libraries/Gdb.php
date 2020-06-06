@@ -44,9 +44,9 @@ class gdb {
 		}
 	}
 
-	function checkBeauticianLogin() {
-		if ($this->CI->session->userdata('beautician_id') == '') {
-			redirect(base_url('beautician'));
+	function checkTeacherLogin() {
+		if ($this->CI->session->userdata('teacher_id') == '') {
+			redirect(base_url('login/teacher_login'));
 		}
 	}
 

@@ -55,7 +55,6 @@ class Users extends CI_Controller {
 				'address' => trim($this->input->post('address')),
 				'status' => $this->input->post('status'),
 				'video_permission' => $this->input->post('video_permission'),
-				'password' => md5($this->input->post('password')),
 			);
 
 			if (isset($_FILES['user_image']['name']) && $_FILES['user_image']['error'] == 0) {
@@ -73,6 +72,9 @@ class Users extends CI_Controller {
 
 			if (!empty($this->input->post('user_id'))) {
 				$id = $this->input->post('user_id');
+				if (!empty($this->input->post('password'))) {
+					$user['password'] = md5($this->input->post('password'));
+				}
 				$result = $this->user_model->updateUser($id, $user);
 				if ($result) {
 					$this->session->set_flashdata('success', "Student Updated Successfully.");
@@ -80,6 +82,8 @@ class Users extends CI_Controller {
 					$this->session->set_flashdata('error', "Error While Updateing Record.");
 				}
 			} else {
+				$user['password'] = md5($this->input->post('password'));
+
 				$result = $this->user_model->addUser($user);
 				if ($result) {
 					$id = $result;

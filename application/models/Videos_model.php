@@ -17,6 +17,7 @@ class Videos_model extends CI_Model {
 		}
 		$this->gdb->select('v.*, t.name AS class_name');
 		$this->gdb->join($this->common->getClassesTable() . ' AS t', 'v.class_id = t.id', 'LEFT');
+		$this->gdb->where('v.is_deleted', 0);
 		return $this->db->get($this->common->getVideosTable() . ' AS  v ')->result();
 	}
 
