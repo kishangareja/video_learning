@@ -35,7 +35,7 @@ class gdb {
 	 */
 	public function __construct() {
 		$this->CI = &get_instance();
-		$this->db = &$this->CI->db;
+		$this->db = &$this->CI->mongo_db;
 	}
 
 	function checkAdminLogin() {

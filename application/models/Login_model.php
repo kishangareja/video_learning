@@ -7,7 +7,7 @@ class Login_model extends CI_Model {
 	public function getAdminLogin($email, $pwd) {
 		$this->mongo_db->where('email_id', $email);
 		$this->mongo_db->where('password', $pwd);
-		return $this->mongo_db->select($this->common->getAdminTable())->row();
+		return $this->mongo_db->find_one($this->common->getAdminTable()); //->get($this->common->getAdminTable());
 	}
 
 	public function getTeacherLogin($email, $pwd) {
@@ -19,7 +19,7 @@ class Login_model extends CI_Model {
 	public function getUserLogin($email, $pwd) {
 		$this->mongo_db->where('email_id', $email);
 		$this->mongo_db->where('password', $pwd);
-		return $this->mongo_db->get($this->common->getAdminTable());
+		return $this->mongo_db->find_one($this->common->getAdminTable());
 		// $this->mongo_db->where('email', $email);
 		// $this->mongo_db->where('password', $pwd);
 		// return $this->gdb->get($this->common->getUserTable())->row();
