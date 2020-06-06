@@ -934,6 +934,83 @@ Class Mongo_db{
 
 	/**
 	* --------------------------------------------------------------------------------
+	* // Find
+	* --------------------------------------------------------------------------------
+	*
+	* Get the document based upon the passed parameters
+	*
+	* @usage : $this->mongo_db->find('foo');
+	*/
+	public function find($collection = "")
+	{
+
+		if (empty($collection))
+		{
+			show_error("In order to retrieve documents from MongoDB, a collection name must be passed", 500);
+		}
+
+		try{	
+
+			$read_concern    = new MongoDB\Driver\ReadConcern($this->read_concern);
+			$read_preference = new MongoDB\Driver\ReadPreference($this->read_preference);
+
+			$options = array();
+			$options['projection'] = $this->selects;
+			$options['sort'] = $this->sorts;
+			$options['skip'] = (int) $this->offset;
+			$options['limit'] = (int) 1;
+			$options['readConcern'] = $read_concern;
+
+			$query = new MongoDB\Driver\Query($this->wheres, $options);
+			$cursor = $this->db->executeQuery($this->database.".".$collection, $query, $read_preference);
+
+			// Clear
+			$this->_clear();
+			$returns = array();
+			
+			if ($cursor instanceof MongoDB\Driver\Cursor)
+			{
+				$it = new \IteratorIterator($cursor);
+				$it->rewind();
+
+				while ($doc = (array)$it->current())
+				{
+					if ($this->return_as == 'object')
+					{
+						$returns[] = (object) $this->convert_document_id($doc);
+					}
+					else
+					{
+						$returns[] = (array) $this->convert_document_id($doc);
+					}
+					$it->next();
+				}
+			}
+
+			if ($this->return_as == 'object')
+			{
+				return (object)$returns;
+			}
+			else
+			{
+				return $returns;
+			}
+		}
+		catch (MongoDB\Driver\Exception $e)
+		{
+			if(isset($this->debug) == TRUE && $this->debug == TRUE)
+			{
+				show_error("MongoDB query failed: {$e->getMessage()}", 500);
+			}
+			else
+			{
+				show_error("MongoDB query failed.", 500);
+			}
+		}
+	}
+
+	/**
+	* --------------------------------------------------------------------------------
 	* // Find One
 	* --------------------------------------------------------------------------------
 	*
@@ -989,11 +1066,15 @@ Class Mongo_db{
 
 			if ($this->return_as == 'object')
 			{
-				return (object)$returns;
+				foreach ($returns as $doc) {
+					return (object)$doc;
+				}
 			}
 			else
 			{
-				return $returns;
+				foreach ($returns as $doc) {
+					return (object)$doc;
+				}
 			}
 		}
 		catch (MongoDB\Driver\Exception $e)
@@ -2016,5 +2097,4 @@ Class Mongo_db{
 			$this->updates[ $method ] = array();
 		}
 	}
-
 }

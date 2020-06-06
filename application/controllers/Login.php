@@ -38,10 +38,9 @@ class Login extends CI_Controller {
 
 	public function check_login() {
 		$email = $_POST['email'];
-		$password = $_POST['password'];
+		$password = md5($_POST['password']);
 		$success = 0;
 		$message = 'Emailid or Password must be required field..!';
-		echo $email. "---" . $password;
 		$user_detail = '';
 		if ($email && $password) {
 			$data = $this->login_model->getUserLogin($email, $password);
@@ -49,7 +48,6 @@ class Login extends CI_Controller {
 			$message = 'EmailID or Password did not matched';
 			$user_detail = '';
 			if ($data) {
-				print_r($data);exit;
 				$this->session->set_userdata('user_id', $data->user_id);
 				$this->session->set_userdata('email', $data->email);
 				$this->session->set_userdata('fname', $data->fname);
