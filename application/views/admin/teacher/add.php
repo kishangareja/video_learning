@@ -18,7 +18,7 @@
           </div>
           <!-- /.box-header -->
           <!-- form start -->
-          <?php $teacher_id = isset($user_data->id) ? $user_data->id : 0;?>
+          <?php $teacher_id = isset($user_data->_id->{'$id'}) ? $user_data->_id->{'$id'} : 0 ?>
           <form role="form"  method="post" action="<?php echo base_url('admin/teacher/add/' . $teacher_id); ?>" enctype="multipart/form-data">
             <div class="box-body">
               <div class="form-group <?php echo ((form_error('username') != "") ? "has-error" : ""); ?>">
@@ -64,7 +64,7 @@ if (isset($user_data) && $user_data->class_id == $value['id']) {
                 </select>
                 <?php echo form_error('status'); ?>
               </div>
-              <input type="hidden" name="teacher_id" data-required="1"  class="form-control" value="<?php echo isset($user_data->id) ? $user_data->id : 0 ?>" />
+              <input type="hidden" name="teacher_id" data-required="1"  class="form-control" value="<?php echo isset($user_data->_id->{'$id'}) ? $user_data->_id->{'$id'} : 0 ?>" />
             </div>
             <!-- /.box-body -->
             <div class="box-footer">

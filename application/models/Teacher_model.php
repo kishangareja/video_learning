@@ -40,7 +40,7 @@ class Teacher_model extends CI_Model {
 	 * Update User
 	 * */
 	public function updateTeacher($id, $data) {
-		$this->db->where('id', $id);
+		$this->db->where('_id', $id);
 		return $this->gdb->update($this->common->getTeacherTable(), $data);
 	}
 
@@ -70,9 +70,8 @@ var_dump($varData);
 	 * get user
 	 */
 	public function getTeacher($id) {
-		$this->db->select('u.*');
-		$this->db->where('u.id', $id);
-		return $this->gdb->get($this->common->getTeacherTable() . ' As u')->row();
+		$this->db->where('_id', $id);
+		return $this->gdb->find_one($this->common->getTeacherTable());
 	}
 
 }

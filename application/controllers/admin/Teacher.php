@@ -24,7 +24,6 @@ class Teacher extends CI_Controller {
 		$this->data['page_title'] = 'Add Teacher';
 		$this->data['view'] = 'admin/teacher/add';
 		$this->data['tags_data'] = $this->classes_model->getClasses(1);
-
 		$action = 'Add';
 		if ($id) {
 			$this->data['page_title'] = 'Edit Teacher';
@@ -56,6 +55,7 @@ class Teacher extends CI_Controller {
 					$user['password'] = md5($this->input->post('password'));
 				}
 				$result = $this->teacher_model->updateTeacher($id, $user);
+				var_dump($result);exit;
 				if ($result) {
 					$this->session->set_flashdata('success', "Teacher Updated Successfully.");
 				} else {

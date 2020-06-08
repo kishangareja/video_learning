@@ -137,7 +137,7 @@ class gdb {
 	 */
 	public function update($table, $data) {
 		$data['modification_datetime'] = DATETIME;
-		return $this->db->update($table, $data);
+		return $this->db->set($data)->update($table);
 	}
 
 	/**
