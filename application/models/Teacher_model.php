@@ -40,7 +40,7 @@ class Teacher_model extends CI_Model {
 	 * Update User
 	 * */
 	public function updateTeacher($id, $data) {
-		$this->db->where('id', $id);
+		$this->db->where('_id', $id);
 		return $this->gdb->update($this->common->getTeacherTable(), $data);
 	}
 
@@ -49,19 +49,29 @@ class Teacher_model extends CI_Model {
 	 */
 	public function getAllTeacher() {
 
-		$this->gdb->select('u.*, t.name AS class_name');
-		$this->gdb->join($this->common->getClassesTable() . ' AS t', 'u.class_id = t.id', 'LEFT');
-		$this->gdb->where('u.is_deleted', 0);
-		return $this->db->get($this->common->getTeacherTable() . ' AS  u ')->result();
+		// $this->gdb->select('u.*, t.name AS class_name');
+		$varData = $this->mongo_db->aggregate($this->common->getTeacherTable(), array(
+				[
+					'$lookup' => array(
+						'from' => $this->common->getClassesTable(),
+						'localField' => 'id',
+						'foreignField' => 'class_id',
+						'as' => 'post_comments'
+					),
+				],
+		));
+var_dump($varData);
+		// $this->gdb->join($this->common->getClassesTable() . ' AS t', 'u.class_id = t.id', 'LEFT');
+		// $this->gdb->where('u.is_deleted', 0);
+		return [];
 	}
 
 	/**
 	 * get user
 	 */
 	public function getTeacher($id) {
-		$this->db->select('u.*');
-		$this->db->where('u.id', $id);
-		return $this->gdb->get($this->common->getTeacherTable() . ' As u')->row();
+		$this->db->where('_id', $id);
+		return $this->gdb->find_one($this->common->getTeacherTable());
 	}
 
 }

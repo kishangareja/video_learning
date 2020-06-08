@@ -1433,6 +1433,29 @@ Class Mongo_db {
 		$command = array('aggregate' => $collection, 'pipeline' => $operation);
 		return $this->command($command);
 	}
+	/*
+	* --------------------------------------------------------------------------------
+	* Aggregation Operation
+	* --------------------------------------------------------------------------------
+	*
+	* Perform aggregation on mongodb collection
+	*
+	* @usage : $this->mongo_db->aggregate('foo', $ops = array());
+	*/
+	public function aggregate($collection, $operation)
+	{
+        if (empty($collection))
+	 	{
+	 		show_error("In order to retreive documents from MongoDB, a collection name must be passed", 500);
+	 	}
+ 		
+ 		if (empty($operation) && !is_array($operation))
+	 	{
+	 		show_error("Operation must be an array to perform aggregate.", 500);
+	 	}
+		$command = array('aggregate'=>$collection, 'pipeline'=>$operation);
+		return $this->command($command);		
+    }
 
 	/**
 	 * --------------------------------------------------------------------------------
@@ -1569,6 +1592,8 @@ Class Mongo_db {
 			} else {
 				show_error("MongoDB query failed.", 500);
 			}
+		} catch (Exception $e) {
+			show_error("MongoDB Failed: {$e->getMessage()}", 500);
 		}
 	}
 
