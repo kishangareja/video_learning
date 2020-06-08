@@ -8,19 +8,20 @@ class Classes extends CI_Controller {
 
 		parent::__construct();
 		$this->load->model(array('classes_model'));
-		$this->gdb->checkAdminLogin();
+		// $this->gdb->checkAdminLogin();
 
 	}
 
 	public function index() {
 		$data['tags_data'] = $this->classes_model->getClasses();
+
 		$data['view'] = 'admin/classes/view';
 		$data['page_title'] = 'Class List';
 		$this->load->view('admin/admin_master', $data);
 	}
 
-	public function add($id = 0) {
-		$id = $id + 0;
+	public function add($id = '') {
+		// $id = $id + 0;
 		$data['page_title'] = 'Add Class';
 		$data['view'] = 'admin/classes/add';
 		$action = 'Add';
@@ -29,6 +30,8 @@ class Classes extends CI_Controller {
 			$action = 'Edit';
 			$data['tags_data'] = $this->classes_model->getClassesById($id);
 		}
+		echo "<pre>";
+		print_r($data['tags_data']);die;
 
 		$this->form_validation->set_error_delimiters('<div id="alrt" class="alert alert-danger" style="padding:5px;margin-top:5px;">', '</div>');
 		if (!empty($this->input->post('tag_id'))) {
@@ -55,6 +58,7 @@ class Classes extends CI_Controller {
 				}
 			} else {
 				$result = $this->classes_model->addClasses($package);
+
 				if ($result) {
 					$id = $result;
 					$this->session->set_flashdata('success', "Class Added Successfully.");

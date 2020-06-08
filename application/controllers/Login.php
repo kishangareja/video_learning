@@ -23,6 +23,8 @@ class Login extends CI_Controller {
 			$email = $_POST['email'];
 			$password = md5($_POST['pwd']);
 			$data = $this->login_model->getAdminLogin($email, $password);
+			echo "<pre>";
+			print_r($data);die;
 			if ($data) {
 				$this->session->set_userdata('admin_id', $data->admin_id);
 				$this->session->set_userdata('admin_data', $data);

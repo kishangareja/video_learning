@@ -1,4 +1,7 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php if (!defined('BASEPATH')) {
+	exit('No direct script access allowed');
+}
+
 /*
 | -------------------------------------------------------------------------
 | DATABASE CONNECTIVITY SETTINGS
@@ -23,7 +26,7 @@
 | The $config['mongo_db']['active'] variable lets you choose which connection group to
 | make active.  By default there is only one group (the 'default' group).
 |
-*/
+ */
 
 $config['mongo_db']['active'] = 'default';
 
@@ -35,11 +38,12 @@ $config['mongo_db']['default']['password'] = '';
 $config['mongo_db']['default']['database'] = 'video_learning';
 $config['mongo_db']['default']['db_debug'] = TRUE;
 $config['mongo_db']['default']['return_as'] = 'array';
-$config['mongo_db']['default']['write_concerns'] = (int)1;
+$config['mongo_db']['default']['write_concerns'] = (int) 1;
 $config['mongo_db']['default']['journal'] = TRUE;
-$config['mongo_db']['default']['read_preference'] = 'primary'; 
+$config['mongo_db']['default']['read_preference'] = (int) 1; //'primary';
 $config['mongo_db']['default']['read_concern'] = 'local'; //'local', 'majority' or 'linearizable'
 $config['mongo_db']['default']['legacy_support'] = TRUE;
+$config['mongo_db']['default']['mongo_server'] = null;
 
 /* End of file database.php */
 /* Location: ./application/config/database.php */

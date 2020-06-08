@@ -27,6 +27,6 @@ class Login_model extends CI_Model {
 
 	public function updatePassword($id, $data) {
 		$this->mongo_db->where('admin_id', $id);
-		$this->mongo_db->update($this->common->getAdminTable(), $data);
+		return $this->mongo_db->update($this->common->getAdminTable(), $data);
 	}
 }

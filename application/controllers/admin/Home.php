@@ -6,7 +6,7 @@ class Home extends CI_Controller {
 
 	function __construct() {
 		parent::__construct();
-		$this->gdb->checkAdminLogin();
+		// $this->gdb->checkAdminLogin();
 	}
 
 	public function index() {

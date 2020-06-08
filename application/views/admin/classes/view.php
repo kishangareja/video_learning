@@ -30,24 +30,25 @@
                             </thead>
                             <tbody>
                                 <?php
+
 $i = 1;
 if (!empty($tags_data)) {
-	foreach ($tags_data as $key => $value) {
+	foreach ($tags_data as $value) {
 		?>
                                 <tr class="odd gradeX">
                                     <td> <?php echo $i++; ?></td>
-                                    <td><?php echo $value->name; ?></td>
-                                    <td><?php echo $value->modification_datetime; ?></td>
+                                    <td><?php echo $value['name']; ?></td>
+                                    <td><?php echo $value['modification_datetime']; ?></td>
                                     <td>
-                                        <?php if ($value->status) {?>
+                                        <?php if ($value['status']) {?>
                                         <span class="label block btn-success btn-xs"> Active </span>
                                         <?php } else {?>
                                         <span class="label block btn-danger btn-xs"> Inactive </span>
                                         <?php }?>
                                     </td>
                                     <td>
-                                        <a href="<?php echo base_url('admin/classes/add/' . $value->id); ?>" class="btn btn-circle btn-sm blue"><i class="fa fa-edit fa-2x"></i></a>
-                                        <a onclick="deleteItem('<?php echo $value->id ?>')" href="javascript:;" data-backdrop="static" data-keyboard="false" class="btn btn-circle btn-sm red"><i class="fa fa-trash-o fa-2x"></i></a>
+                                        <a href="<?php echo base_url('admin/classes/add/' . $value['_id']->{'$id'}); ?>" class="btn btn-circle btn-sm blue"><i class="fa fa-edit fa-2x"></i></a>
+                                        <a onclick="deleteItem('<?php echo $value['_id']->{'$id'} ?>')" href="javascript:;" data-backdrop="static" data-keyboard="false" class="btn btn-circle btn-sm red"><i class="fa fa-trash-o fa-2x"></i></a>
                                     </td>
                                 </tr>
                                 <?php }}?>

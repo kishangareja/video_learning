@@ -12,17 +12,22 @@ class Classes_model extends CI_Model {
 	}
 
 	public function getClasses($status = 0) {
-		if ($status) {
-			$this->gdb->where('status', $status);
-		}
-		$this->gdb->where('is_deleted', 0);
-		return $this->gdb->get($this->common->getClassesTable())->result();
+		// if ($status) {
+		// 	$this->gdb->where('status', $status);
+		// }
+		// $this->gdb->where('is_deleted', 0);
+		return $this->gdb->find($this->common->getClassesTable());
 	}
 
 	public function getClassesById($id) {
-		$this->gdb->where('id', $id);
-		return $this->gdb->get($this->common->getClassesTable())->row();
+		$this->mongo_db->where(array('_id' => new Mongo_db($id)));
+		$resutl = $this->mongo_db->find_one($this->common->getClassesTable());
+		echo "<pre>";
+		print_r($resutl);
+		die;
+		// return
 	}
+
 	public function updateClasses($id, $data) {
 		$this->gdb->where('id', $id);
 		return $this->gdb->update($this->common->getClassesTable(), $data);
@@ -38,7 +43,7 @@ class Classes_model extends CI_Model {
 	 */
 	public function checkExist($name) {
 		$this->gdb->where('name', $name);
-		return $this->gdb->get($this->common->getClassesTable())->row();
+		return $this->gdb->get($this->common->getClassesTable());
 	}
 
 }

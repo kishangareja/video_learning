@@ -8,7 +8,7 @@ class Teacher extends CI_Controller {
 		parent::__construct();
 		$this->load->model('teacher_model');
 		$this->load->model('classes_model');
-		$this->gdb->checkAdminLogin();
+		// $this->gdb->checkAdminLogin();
 
 	}
 
