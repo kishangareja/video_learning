@@ -16,7 +16,7 @@ class Classes_model extends CI_Model {
 			$this->gdb->where('status', $status);
 		}
 		$this->gdb->where('is_deleted', 0);
-		return $this->gdb->get($this->common->getClassesTable())->result();
+		return $this->gdb->get($this->common->getClassesTable());
 	}
 
 	public function getClassesById($id) {

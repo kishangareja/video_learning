@@ -42,11 +42,11 @@
                   <option value="">--Select Class--</option>
                   <?php foreach ($tags_data as $value) {
 	?>
-                  <option value="<?php echo $value->id ?>" <?php
-if (isset($user_data) && $user_data->class_id == $value->id) {
+                  <option value="<?php echo $value['id'] ?>" <?php
+if (isset($user_data) && $user_data->class_id == $value['id']) {
 		echo "selected";
 	}
-	?>><?php echo $value->name ?></option>
+	?>><?php echo $value['name'] ?></option>
                   <?php }?>
                 </select>
                 <?php echo ((form_error('class_id') != "") ? '<span class="help-inline" style="color:red">' . form_error('class_id') . '</span>' : ''); ?>

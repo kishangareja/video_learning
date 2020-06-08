@@ -20,7 +20,7 @@ class Teacher extends CI_Controller {
 	}
 
 	public function add($id = 0) {
-		$id = $id + 0;
+		// $id = $id + 0;
 		$this->data['page_title'] = 'Add Teacher';
 		$this->data['view'] = 'admin/teacher/add';
 		$this->data['tags_data'] = $this->classes_model->getClasses(1);
@@ -65,7 +65,7 @@ class Teacher extends CI_Controller {
 				$user['password'] = md5($this->input->post('password'));
 				$result = $this->teacher_model->addTeacher($user);
 				if ($result) {
-					$id = $result;
+					$id = $result['_id'];
 					$this->session->set_flashdata('success', "Teacher Added Successfully.");
 				} else {
 					$this->session->set_flashdata('error', "Error While Inserting Record.");

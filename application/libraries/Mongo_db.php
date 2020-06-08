@@ -1731,7 +1731,6 @@ Class Mongo_db{
 	 	{
 	 		show_error("Operation must be an array to perform aggregate.", 500);
 	 	}
-
 		$command = array('aggregate'=>$collection, 'pipeline'=>$operation);
 		return $this->command($command);		
     }
@@ -1899,6 +1898,8 @@ Class Mongo_db{
 			{
 				show_error("MongoDB query failed.", 500);
 			}
+		} catch (Exception $e) {
+			show_error("MongoDB Failed: {$e->getMessage()}", 500);
 		}
     }
 

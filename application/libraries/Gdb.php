@@ -125,8 +125,7 @@ class gdb {
 	public function insert($table, $data) {
 		$data['creation_datetime'] = DATETIME;
 		$data['modification_datetime'] = DATETIME;
-		$this->db->insert($table, $data);
-		return $this->db->insert_id();
+		return $this->db->insert($table, $data);
 	}
 
 	/**

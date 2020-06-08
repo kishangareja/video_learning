@@ -49,10 +49,21 @@ class Teacher_model extends CI_Model {
 	 */
 	public function getAllTeacher() {
 
-		$this->gdb->select('u.*, t.name AS class_name');
-		$this->gdb->join($this->common->getClassesTable() . ' AS t', 'u.class_id = t.id', 'LEFT');
-		$this->gdb->where('u.is_deleted', 0);
-		return $this->db->get($this->common->getTeacherTable() . ' AS  u ')->result();
+		// $this->gdb->select('u.*, t.name AS class_name');
+		$varData = $this->mongo_db->aggregate($this->common->getTeacherTable(), array(
+				[
+					'$lookup' => array(
+						'from' => $this->common->getClassesTable(),
+						'localField' => 'id',
+						'foreignField' => 'class_id',
+						'as' => 'post_comments'
+					),
+				],
+		));
+var_dump($varData);
+		// $this->gdb->join($this->common->getClassesTable() . ' AS t', 'u.class_id = t.id', 'LEFT');
+		// $this->gdb->where('u.is_deleted', 0);
+		return [];
 	}
 
 	/**
