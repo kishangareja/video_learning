@@ -1421,7 +1421,7 @@ Class Mongo_db {
 	 *
 	 * @usage : $this->mongo_db->aggregate('foo', $ops = array());
 	 */
-	public function aggregate($collection, $operation) {
+	public function aggregate($collection, $operation, $options = array()) {
 		if (empty($collection)) {
 			show_error("In order to retreive documents from MongoDB, a collection name must be passed", 500);
 		}
@@ -1429,34 +1429,18 @@ Class Mongo_db {
 		if (empty($operation) && !is_array($operation)) {
 			show_error("Operation must be an array to perform aggregate.", 500);
 		}
-
 		$command = array('aggregate' => $collection, 'pipeline' => $operation);
+		$options += [
+			'cursor' => array('batchSize' => 0)
+		];
+		if(!empty($options) && is_array($operation)) {
+			foreach($options as $key => $value) {
+				$command[$key] = $value;
+			}
+		}
 		return $this->command($command);
 	}
-	/*
-	* --------------------------------------------------------------------------------
-	* Aggregation Operation
-	* --------------------------------------------------------------------------------
-	*
-	* Perform aggregation on mongodb collection
-	*
-	* @usage : $this->mongo_db->aggregate('foo', $ops = array());
-	*/
-	public function aggregate($collection, $operation)
-	{
-        if (empty($collection))
-	 	{
-	 		show_error("In order to retreive documents from MongoDB, a collection name must be passed", 500);
-	 	}
- 		
- 		if (empty($operation) && !is_array($operation))
-	 	{
-	 		show_error("Operation must be an array to perform aggregate.", 500);
-	 	}
-		$command = array('aggregate'=>$collection, 'pipeline'=>$operation);
-		return $this->command($command);		
-    }
-
+	
 	/**
 	 * --------------------------------------------------------------------------------
 	 * // Order by

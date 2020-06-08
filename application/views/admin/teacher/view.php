@@ -43,15 +43,14 @@ if (!empty($user_data)) {
                                             <tr class="odd gradeX">
 
                                                 <td> <?php echo $i++; ?></td>
+                                                <td><?php  echo  isset($value['teacher_class'][0]) ? $value['teacher_class'][0]->name : '' ?></td>
+                                                <td><?php echo $value['username']; ?></td>
+                                                <td><?php echo $value['email']; ?></td>
+                                                <td><?php echo $value['phone']; ?></td>
 
-                                                <td><?php echo $value->class_name; ?></td>
-                                                <td><?php echo $value->username; ?></td>
-                                                <td><?php echo $value->email; ?></td>
-                                                <td><?php echo $value->phone; ?></td>
-
-                                                <td><?php echo $value->modification_datetime; ?></td>
+                                                <td><?php echo $value['modification_datetime']; ?></td>
                                                 <td>
-                                                    <?php if ($value->status) {?>
+                                                    <?php if ($value['status']) {?>
                                                         <span class="label block btn-success btn-xs"> Active </span>
                                                     <?php } else {?>
                                                         <span class="label block btn-danger btn-xs"> Inactive </span>
@@ -59,8 +58,8 @@ if (!empty($user_data)) {
                                                 </td>
                                                 <td>
 
-                                                        <a href="<?php echo base_url('admin/teacher/add/' . $value->id); ?>" class="btn btn-circle btn-sm blue"><i class="fa fa-edit fa-2x"></i></a>
-                                                        <a onclick="deleteItem('<?php echo $value->id ?>')" href="javascript:;" data-backdrop="static" data-keyboard="false" class="btn btn-circle btn-sm red"><i class="fa fa-trash-o fa-2x"></i></a>
+                                                        <a href="<?php echo base_url('admin/teacher/add/' . $value['_id']->{'$id'}); ?>" class="btn btn-circle btn-sm blue"><i class="fa fa-edit fa-2x"></i></a>
+                                                        <a onclick="deleteItem('<?php echo  $value['_id']->{'$id'} ?>')" href="javascript:;" data-backdrop="static" data-keyboard="false" class="btn btn-circle btn-sm red"><i class="fa fa-trash-o fa-2x"></i></a>
                                                 </td>
                                             </tr>
                                             <?php }}?>
