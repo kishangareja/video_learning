@@ -42,8 +42,8 @@
                   <option value="">--Select Class--</option>
                   <?php foreach ($tags_data as $value) {
 	?>
-                  <option value="<?php echo $value['id'] ?>" <?php
-if (isset($user_data) && $user_data->class_id == $value['id']) {
+                  <option value="<?php echo $value['_id']->{'$id'} ?>" <?php
+if (isset($user_data) && $user_data->class_id == $value['_id']->{'$id'}) {
 		echo "selected";
 	}
 	?>><?php echo $value['name'] ?></option>

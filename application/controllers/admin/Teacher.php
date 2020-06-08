@@ -55,7 +55,6 @@ class Teacher extends CI_Controller {
 					$user['password'] = md5($this->input->post('password'));
 				}
 				$result = $this->teacher_model->updateTeacher($id, $user);
-				var_dump($result);exit;
 				if ($result) {
 					$this->session->set_flashdata('success', "Teacher Updated Successfully.");
 				} else {
